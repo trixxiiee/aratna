@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>You're Invited! 🎉</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Pacifico&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Fredoka", sans-serif;
+
+      background:
+        radial-gradient(circle at 10% 20%, #ffd6e7 0 8%, transparent 9%),
+        radial-gradient(circle at 90% 10%, #fff1a8 0 7%, transparent 8%),
+        radial-gradient(circle at 80% 80%, #c9f7ff 0 9%, transparent 10%),
+        linear-gradient(135deg, #ff8fab, #b388ff, #6dd5ed);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 30px 15px;
+      overflow-x: hidden;
+
+      position: relative;
+    }
+
+
+    /* =========================
+       BALLOONS
+       ========================= */
+
+    .balloon {
+      position: fixed;
+
+      width: 55px;
+      height: 70px;
+
+      border-radius: 50%;
+
+      opacity: 0.85;
+
+      animation: float 5s ease-in-out infinite;
+
+      z-index: 0;
+    }
+
+    .balloon::after {
+      content: "";
+
+      position: absolute;
+
+      width: 1px;
+      height: 90px;
+
+      background: rgba(0, 0, 0, 0.25);
+
+      top: 65px;
+      left: 50%;
+    }
+
+    .balloon.one {
+      background: #ff4d6d;
+      left: 5%;
+      top: 15%;
+    }
+
+    .balloon.two {
+      background: #ffd166;
+      right: 7%;
+      top: 20%;
+      animation-delay: 1s;
+    }
+
+    .balloon.three {
+      background: #06d6a0;
+      left: 8%;
+      bottom: 10%;
+      animation-delay: 2s;
+    }
+
+    .balloon.four {
+      background: #8338ec;
+      right: 8%;
+      bottom: 15%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes float {
+
+      0%, 100% {
+        transform: translateY(0) rotate(-3deg);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+
+    /* =========================
+       CONFETTI
+       ========================= */
+
+    .confetti {
+      position: fixed;
+
+      width: 10px;
+      height: 18px;
+
+      animation: fall linear infinite;
+
+      opacity: 0.8;
+
+      z-index: 0;
+    }
+
+    .c1 {
+      left: 15%;
+      background: #ffea00;
+      animation-duration: 5s;
+    }
+
+    .c2 {
+      left: 30%;
+      background: #ff006e;
+      animation-duration: 7s;
+    }
+
+    .c3 {
+      left: 50%;
+      background: #00f5d4;
+      animation-duration: 6s;
+    }
+
+    .c4 {
+      left: 70%;
+      background: #8338ec;
+      animation-duration: 8s;
+    }
+
+    .c5 {
+      left: 85%;
+      background: #fb5607;
+      animation-duration: 5.5s;
+    }
+
+    @keyframes fall {
+
+      0% {
+        top: -30px;
+        transform: rotate(0);
+      }
+
+      100% {
+        top: 110vh;
+        transform: rotate(720deg);
+      }
+    }
+
+
+    /* =========================
+       INVITATION CARD
+       ========================= */
+
+    .invitation {
+
+      position: relative;
+      z-index: 2;
+
+      width: min(600px, 100%);
+
+      background: rgba(255, 255, 255, 0.96);
+
+      border-radius: 35px;
+
+      padding: 45px 35px;
+
+      text-align: center;
+
+      box-shadow:
+        0 30px 80px rgba(54, 32, 91, 0.30),
+        0 0 0 5px rgba(255, 255, 255, 0.30);
+
+      animation: appear 0.8s ease;
+    }
+
+    @keyframes appear {
+
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+
+    /* =========================
+       TITLE
+       ========================= */
+
+    .emoji {
+
+      font-size: 65px;
+
+      margin-bottom: 10px;
+
+      animation: party 1.5s infinite;
+    }
+
+    @keyframes party {
+
+      0%, 100% {
+        transform: rotate(-8deg);
+      }
+
+      50% {
+        transform: rotate(8deg) scale(1.08);
+      }
+    }
+
+    .small-title {
+
+      color: #ff4d6d;
+
+      text-transform: uppercase;
+
+      font-weight: 700;
+
+      letter-spacing: 4px;
+
+      font-size: 14px;
+
+      margin-bottom: 10px;
+    }
+
+    h1 {
+
+      font-family: "Pacifico", cursive;
+
+      color: #5e2ca5;
+
+      font-size: clamp(42px, 8vw, 68px);
+
+      line-height: 1.1;
+
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+
+      color: #555;
+
+      font-size: 18px;
+
+      line-height: 1.6;
+
+      margin-bottom: 25px;
+    }
+
+
+    /* =========================
+       PARTY DETAILS
+       ========================= */
+
+    .party-details {
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff0f5,
+          #f4edff
+        );
+
+      border-radius: 22px;
+
+      padding: 20px;
+
+      margin: 25px 0;
+
+      border: 2px dashed #d5b5ff;
+    }
+
+    .detail {
+
+      margin: 10px 0;
+
+      color: #444;
+
+      font-size: 17px;
+    }
+
+    .detail strong {
+
+      color: #6a35a8;
+    }
+
+
+    /* =========================
+       NAME
+       ========================= */
+
+    .name-section {
+
+      margin-top: 25px;
+    }
+
+    .name-section label {
+
+      display: block;
+
+      color: #5e2ca5;
+
+      font-size: 18px;
+
+      font-weight: 600;
+
+      margin-bottom: 10px;
+    }
+
+    #name {
+
+      width: 100%;
+
+      border: 2px solid #e0d0ff;
+
+      border-radius: 15px;
+
+      padding: 15px 18px;
+
+      font-size: 17px;
+
+      font-family: inherit;
+
+      outline: none;
+
+      background: white;
+
+      transition: 0.25s;
+    }
+
+    #name:focus {
+
+      border-color: #9b5de5;
+
+      box-shadow:
+        0 0 0 4px rgba(155, 93, 229, 0.12);
+    }
+
+
+    /* =========================
+       BUTTONS
+       ========================= */
+
+    .buttons {
+
+      min-height: 120px;
+
+      margin-top: 25px;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 20px;
+    }
+
+    button {
+
+      border: none;
+
+      font-family: inherit;
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+      padding: 15px 30px;
+
+      border-radius: 50px;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.25s,
+        box-shadow 0.25s,
+        opacity 0.25s;
+    }
+
+
+    /* YES */
+
+    #yesBtn {
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #00c853,
+          #00a844
+        );
+
+      box-shadow:
+        0 8px 20px rgba(0, 200, 83, 0.30);
+    }
+
+    #yesBtn:hover {
+
+      transform: translateY(-3px) scale(1.04);
+
+      box-shadow:
+        0 12px 25px rgba(0, 200, 83, 0.40);
+    }
+
+    #yesBtn:disabled {
+
+      cursor: wait;
+      opacity: 0.7;
+    }
+
+
+    /* NO */
+
+    #noBtn {
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff5c8a,
+          #ff1744
+        );
+
+      box-shadow:
+        0 8px 20px rgba(255, 23, 68, 0.25);
+
+      transform-origin: center;
+    }
+
+    #noBtn:disabled {
+      pointer-events: none;
+    }
+
+
+    .hint {
+
+      margin-top: 8px;
+
+      color: #999;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       ERROR
+       ========================= */
+
+    #errorMessage {
+
+      display: none;
+
+      color: #d90035;
+
+      background: #fff0f3;
+
+      border: 1px solid #ffb3c2;
+
+      padding: 15px;
+
+      border-radius: 14px;
+
+      margin-top: 18px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+      word-break: break-word;
+    }
+
+
+    /* =========================
+       SUCCESS
+       ========================= */
+
+    #success {
+
+      display: none;
+
+      animation: success 0.7s ease;
+    }
+
+    @keyframes success {
+
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .big-check {
+
+      font-size: 80px;
+
+      margin-bottom: 10px;
+
+      animation: party 1.5s infinite;
+    }
+
+    #success h2 {
+
+      color: #00a844;
+
+      font-size: 32px;
+
+      margin-bottom: 10px;
+    }
+
+    #success p {
+
+      color: #555;
+
+      font-size: 18px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 500px) {
+
+      .invitation {
+
+        padding: 35px 20px;
+
+        border-radius: 25px;
+      }
+
+      .emoji {
+        font-size: 50px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .buttons {
+        gap: 12px;
+      }
+
+      button {
+        padding: 13px 22px;
+        font-size: 16px;
+      }
+
+      .balloon {
+        transform: scale(0.7);
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- BALLOONS -->
+
+  <div class="balloon one"></div>
+  <div class="balloon two"></div>
+  <div class="balloon three"></div>
+  <div class="balloon four"></div>
+
+
+  <!-- CONFETTI -->
+
+  <div class="confetti c1"></div>
+  <div class="confetti c2"></div>
+  <div class="confetti c3"></div>
+  <div class="confetti c4"></div>
+  <div class="confetti c5"></div>
+
+
+  <!-- INVITATION -->
+
+  <main class="invitation">
+
+    <section id="invitationContent">
+
+      <div class="emoji">
+        🎉
+      </div>
+
+      <div class="small-title">
+        You're Invited!
+      </div>
+
+      <h1>
+        Party Time!
+      </h1>
+
+      <p class="subtitle">
+        Come celebrate, laugh, eat, dance,
+        and have an amazing time with us! 🥳
+      </p>
+
+
+      <!-- PARTY INFORMATION -->
+
+      <div class="party-details">
+
+        <div class="detail">
+          📅
+          <strong>Date:</strong>
+          Saturday, December 12, 2026
+        </div>
+
+        <div class="detail">
+          ⏰
+          <strong>Time:</strong>
+          6:00 PM
+        </div>
+
+        <div class="detail">
+          📍
+          <strong>Location:</strong>
+          My Party Place
+        </div>
+
+        <div class="detail">
+          👗
+          <strong>Dress Code:</strong>
+          Come Party-Ready!
+        </div>
+
+      </div>
+
+
+      <!-- NAME -->
+
+      <div class="name-section">
+
+        <label for="name">
+          What's your name? 💕
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          placeholder="Enter your name..."
+          autocomplete="name"
+          maxlength="50"
+        >
+
+      </div>
+
+
+      <!-- BUTTONS -->
+
+      <div class="buttons">
+
+        <button id="yesBtn">
+          🎉 YES, I'M COMING!
+        </button>
+
+        <button id="noBtn">
+          No 😢
+        </button>
+
+      </div>
+
+      <p class="hint">
+        Choose wisely... 👀
+      </p>
+
+
+      <!-- ERROR -->
+
+      <div id="errorMessage"></div>
+
+    </section>
+
+
+    <!-- SUCCESS -->
+
+    <section id="success">
+
+      <div class="big-check">
+        🎊
+      </div>
+
+      <h2>
+        You're Coming!
+      </h2>
+
+      <p>
+        Awesome,
+        <strong id="guestName"></strong>! 💕
+        <br><br>
+        Your RSVP has been sent successfully.
+        <br><br>
+        See you at the party! 🥳
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    /* =====================================================
+       YOUR EMAILJS INFORMATION
+       ===================================================== */
+
+    const EMAILJS_PUBLIC_KEY =
+      "WKSDvptBPUoDE2NEu";
+
+    const EMAILJS_SERVICE_ID =
+      "service_rwbrj5k";
+
+    const EMAILJS_TEMPLATE_ID =
+      "template_1oxiqdl";
+
+
+    /* =====================================================
+       INITIALIZE EMAILJS
+       ===================================================== */
+
+    emailjs.init({
+      publicKey: EMAILJS_PUBLIC_KEY
+    });
+
+
+    /* =====================================================
+       GET HTML ELEMENTS
+       ===================================================== */
+
+    const nameInput =
+      document.getElementById("name");
+
+    const yesBtn =
+      document.getElementById("yesBtn");
+
+    const noBtn =
+      document.getElementById("noBtn");
+
+    const invitationContent =
+      document.getElementById("invitationContent");
+
+    const success =
+      document.getElementById("success");
+
+    const guestName =
+      document.getElementById("guestName");
+
+    const errorMessage =
+      document.getElementById("errorMessage");
+
+
+    /* =====================================================
+       NO BUTTON
+
+       Each click makes the NO button smaller.
+       ===================================================== */
+
+    let noScale = 1;
+
+    noBtn.addEventListener("click", function () {
+
+      noScale -= 0.15;
+
+      if (noScale < 0.05) {
+        noScale = 0.05;
+      }
+
+      noBtn.style.transform =
+        `scale(${noScale})`;
+
+    });
+
+
+    /* =====================================================
+       YES BUTTON
+       ===================================================== */
+
+    yesBtn.addEventListener("click", async function () {
+
+      /* Clear previous error */
+
+      errorMessage.style.display = "none";
+
+      errorMessage.innerHTML = "";
+
+
+      /* Get name */
+
+      const name =
+        nameInput.value.trim();
+
+
+      /* Check name */
+
+      if (!name) {
+
+        nameInput.focus();
+
+        nameInput.style.borderColor =
+          "#ff1744";
+
+        errorMessage.innerHTML =
+          "💕 Please enter your name first!";
+
+        errorMessage.style.display =
+          "block";
+
+        return;
+      }
+
+
+      /* Disable buttons while sending */
+
+      yesBtn.disabled = true;
+      noBtn.disabled = true;
+
+      yesBtn.textContent =
+        "Sending RSVP... 💌";
+
+
+      /* =================================================
+         INFORMATION SENT TO EMAILJS
+
+         These variable names must match your
+         EmailJS template variables.
+         ================================================= */
+
+      const templateParams = {
+
+        guest_name: name,
+
+        response:
+          "YES - I'M COMING! 🎉",
+
+        party_date:
+          "Saturday, December 12, 2026",
+
+        party_time:
+          "6:00 PM",
+
+        party_location:
+          "My Party Place"
+
+      };
+
+
+      console.log(
+        "Sending RSVP:",
+        templateParams
+      );
+
+
+      /* =================================================
+         SEND EMAIL
+         ================================================= */
+
+      try {
+
+        const result =
+          await emailjs.send(
+            EMAILJS_SERVICE_ID,
+            EMAILJS_TEMPLATE_ID,
+            templateParams
+          );
+
+
+        console.log(
+          "EMAIL SENT SUCCESSFULLY:",
+          result.status,
+          result.text
+        );
+
+
+        /* ===============================================
+           SUCCESS SCREEN
+           =============================================== */
+
+        guestName.textContent =
+          name;
+
+        invitationContent.style.display =
+          "none";
+
+        success.style.display =
+          "block";
+
+
+        /* Party celebration */
+
+        createConfetti();
+
+
+      } catch (error) {
+
+        /* ===============================================
+           EMAILJS ERROR
+           =============================================== */
+
+        console.error(
+          "EMAILJS ERROR:",
+          error
+        );
+
+
+        yesBtn.disabled = false;
+        noBtn.disabled = false;
+
+        yesBtn.textContent =
+          "🎉 YES, I'M COMING!";
+
+
+        let errorText =
+          error?.text ||
+          error?.message ||
+          "Unknown EmailJS error";
+
+
+        errorMessage.innerHTML = `
+          <strong>Oops! 😢</strong><br><br>
+
+          We couldn't send your RSVP.
+
+          <br><br>
+
+          <strong>EmailJS says:</strong><br>
+
+          ${escapeHTML(errorText)}
+        `;
+
+        errorMessage.style.display =
+          "block";
+      }
+
+    });
+
+
+    /* =====================================================
+       ESCAPE ERROR TEXT
+       ===================================================== */
+
+    function escapeHTML(text) {
+
+      const div =
+        document.createElement("div");
+
+      div.textContent = text;
+
+      return div.innerHTML;
+    }
+
+
+    /* =====================================================
+       CONFETTI AFTER YES
+       ===================================================== */
+
+    function createConfetti() {
+
+      const colors = [
+
+        "#ff006e",
+        "#8338ec",
+        "#3a86ff",
+        "#06d6a0",
+        "#ffbe0b",
+        "#fb5607"
+
+      ];
+
+
+      for (
+        let i = 0;
+        i < 100;
+        i++
+      ) {
+
+        const piece =
+          document.createElement("div");
+
+
+        piece.style.position =
+          "fixed";
+
+        piece.style.width =
+          "8px";
+
+        piece.style.height =
+          "15px";
+
+        piece.style.background =
+          colors[
+            Math.floor(
+              Math.random() *
+              colors.length
+            )
+          ];
+
+        piece.style.left =
+          Math.random() * 100 + "vw";
+
+        piece.style.top =
+          "-20px";
+
+        piece.style.zIndex =
+          "9999";
+
+        piece.style.borderRadius =
+          "2px";
+
+        piece.style.transform =
+          `rotate(${Math.random() * 360}deg)`;
+
+        piece.style.transition =
+          `top ${2 + Math.random() * 3}s linear,
+           transform ${2 + Math.random() * 3}s linear`;
+
+        document.body.appendChild(piece);
+
+
+        setTimeout(function () {
+
+          piece.style.top =
+            "110vh";
+
+          piece.style.transform =
+            `rotate(${Math.random() * 1200}deg)`;
+
+        }, 50);
+
+
+        setTimeout(function () {
+
+          piece.remove();
+
+        }, 5500);
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
